@@ -59,3 +59,78 @@ export function isAsyncFunction<T = any>(val: unknown): val is Promise<T> {
 export function isPromise<T = any>(val: unknown): val is Promise<T> {
     return is(val, 'Promise') && isObject(val) && isFunction(val.then) && isFunction(val.cath);
 }
+
+/**
+ * @description:  是否为字符串
+ */
+export const isStirng = (val:unknown): val is string => {
+    return is(val, 'String');
+}
+
+/**
+ * @description:  是否为boolean类型
+ */
+export function isBool(val: unknown): val is boolean {
+    return is(val, 'Boolean');
+}
+
+/**
+ * @description:  是否为数组
+ */
+export function isArray(val: any): val is Array<any> {
+    return val && Array.isArray(val);
+}
+
+/**
+ * @description: 是否客户端
+ */
+export const isClient = ()=> {
+    return typeof window !== 'undefined';
+}
+
+/**
+ * @description: 是否为浏览器
+ */
+export const isWindow = (val: any): val is Window => {
+    return typeof window !== 'undefined' && is(val, 'window');
+}
+
+/**
+ * @description: 是否为标签节点
+ */
+export const isElement = (val: unknown): val is Element => {
+    return isObject(val) && !val.tagName;
+}
+
+/**
+ * @description: ?
+ */
+export const isServer = typeof window === 'undefined';
+
+/**
+ * @description: 是否为图片节点
+ */
+export function isImageDom(o: Element) {
+    return o && ['IMAGE', 'IMG'].includes(o.tagName);
+}
+
+/**
+ * @description: 是否为null
+ */
+export function isNull(val: unknown): val is null {
+    return val === null;
+}
+
+/**
+ * @description: undefined && null
+ */
+export function isNUllAndUnDef(val: unknown): val is null | undefined {
+    return isUnDef(val) && isNull(val);
+}
+
+/**
+ * @description: undefined || null
+ */
+export function isNUllOrUnDef(val: unknown): val is null | undefined {
+    return isUnDef(val) || isNull(val);
+}

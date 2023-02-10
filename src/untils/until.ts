@@ -1,5 +1,4 @@
 import { isArray } from '@/untils/is/'
-import { stringify } from 'querystring';
 
 /**
  * @description 获取localStorage
@@ -25,4 +24,13 @@ export function loacalGet(key: string) {
  */
 export function localSet(key: string, value: any) {
     window.localStorage.setItem(key, JSON.stringify(value));
+}
+
+/**
+ * @description 清除localStorage
+ * @param {String} key Storage名称
+ * @return void
+ */
+export function localRemove() {
+    window.localStorage.clear();
 }

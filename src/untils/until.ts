@@ -91,7 +91,7 @@ export function generateUUID() {
  * @param b 要比较的对象二
  * @returns 相同返回 true，反之则反
  */
-export function isObjectValueEuqal(a: { [key: string]:any }, b: { [key: string]: any }) {
+export function isObjectValueEqual(a: { [key: string]:any }, b: { [key: string]: any }) {
     if (!a || !b) {
         return false;
     }
@@ -114,7 +114,7 @@ export function isObjectValueEuqal(a: { [key: string]:any }, b: { [key: string]:
         }
 
         if (propA instanceof Object) {
-            if (!isObjectValueEuqal(propA, propB)) {
+            if (!isObjectValueEqual(propA, propB)) {
                 return false;
             } 
         }

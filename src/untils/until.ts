@@ -89,7 +89,7 @@ export function generateUUID() {
  * 判断两个对象是否相同
  * @param a 要比较的对象一
  * @param b 要比较的对象二
- * @returns 相同返回 true，反之则反
+ * @return 相同返回 true，反之则反
  */
 export function isObjectValueEqual(a: { [key: string]:any }, b: { [key: string]: any }) {
     if (!a || !b) {
@@ -126,7 +126,88 @@ export function isObjectValueEqual(a: { [key: string]:any }, b: { [key: string]:
     return true;
 }
 
+/**
+ * @description 生成随机数
+ * @param {Number} min 最小值
+ * @param {Number} max 最大值
+ * @return number
+ */
+export function randomNum(min: number, max: number): number {
+    let num = Math.floor(Math.random() * (min - max) + max);
+    return num;
+}
+ 
+/**
+ * @description 获取当前时间对应的提示语
+ * @return string
+ */
+export function getTimeState() {
+    // 获取当前时间
+    let timeNow = new Date();
+    // 获取当前小时
+    let hours = timeNow.getHours();
+    // 判断当前时间段
+    if (hours >=6 && hours <=10) {
+        return `早上好 ⛅`;
+    }
+    if (hours >=10 && hours <=14) {
+        return `中午好 🌞`;
+    }
+    if (hours >=14 && hours <=18) {
+        return `下午好 🌞`;
+    }
+    if (hours >=18 && hours <=24) {
+        return `晚上好 🌛`;
+    }
+    if (hours >=0 && hours <=6) {
+        return `凌晨好 🌛`;
+    }
+}
 
+/**
+ * @description 获取浏览器默认语言
+ * @return string
+ */
+export function getBrowserLang() {
+    // let browserLang = navigator.language ? navigator.language : navigator.languages;
+    let browserLang = navigator.language;
+    let defaultbrowserLang = '';
+    if (browserLang.toLowerCase() === 'cn' || browserLang.toLowerCase() === 'zh' || browserLang.toLowerCase() === 'zh-cn') {
+        defaultbrowserLang = 'zh';
+    }
+    else {
+        defaultbrowserLang = 'en';
+    }
 
+    return defaultbrowserLang;
+}
 
+/**********以下 menuList 参数类型统一用 menu 接口**********/
+// menuList: Menu.MenuOptions[] 找不到命名空间“Menu”。ts(2503)
+interface menu {
+    [key: string]: any;
+}
 
+/**
+ * @description 递归查询当前路由所对应的路由
+ * @param {Array} menuList 所有菜单列表
+ * @param {String} path 当前访问地址
+ * @return array
+ */
+export function filterCurrentRoute(menuList: menu[], path: string) {
+    let result = {};
+    for (let item of menuList) {
+        if (item.path === path) {
+            return item;
+        }
+
+        if (item.children) {
+            const res = filterCurrentRoute(item.children, path);
+
+            if (Object.keys(res).length) {
+                result = res;
+            }
+        }
+    }
+    return result;
+}

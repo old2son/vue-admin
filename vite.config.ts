@@ -30,7 +30,7 @@ export default defineConfig(({ mode, command }: ConfigEnv): UserConfig => {
 		],
 		server: {
 			host: '0.0.0.0', // host: '127.0.0.1',
-			port: env.VITE_PORT,
+			port: env.VITE_PORT as unknown as number,
 			cors: true,
 			proxy: { //服务器代理
 				'/api': {

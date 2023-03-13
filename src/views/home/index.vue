@@ -12,6 +12,7 @@
 <script lange="ts" setup>
 import { store }  from '@/stores';
 import { computed, reactive } from 'vue';
+import axios from 'axios';
 const count = reactive({ count: 0 });
 const assemblySize = computed(() => store.getters.getModuleState('basicModule').assemblySize);
 
@@ -27,6 +28,9 @@ const changeD = () => {
 	count.count++;
 	store.dispatch('basicModule/setAssemblySizeSizeAsync', 'default');
 };
+
+axios.get("/api/menu/list");
+
 </script>
 
 <style scoped></style>

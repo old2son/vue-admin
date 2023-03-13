@@ -3,6 +3,7 @@ import { LOGIN_URL, ROUTER_WHITE_LIST } from '@/config/config';
 import { initDynamicRouter } from '@/routers/modules/dynamicRouter';
 import { staticRouter, errorRouter } from '@/routers/modules/staticRouter';
 import { store } from '@/stores';
+// import {defineStore, createPinia } from 'pinia'
 import NProgress from '@/config/nprogress';
 
 // 引入 views 文件夹下所有 vue 文件（vite 读取方法）
@@ -46,6 +47,21 @@ router.beforeEach(async (to, from, next) => {
 	// 5.判断是否有 Token，没有重定向到 login
 	// if (!basicModule.token) {
 	// 	return next({ path: LOGIN_URL, replace: true });
+	// }
+
+	// {
+	// 	"path": "/home/index",
+	// 	"name": "home",
+	// 	"component": "/home/index",
+	// 	"meta": {
+	// 		"icon": "HomeFilled",
+	// 		"title": "首页",
+	// 		"isLink": "",
+	// 		"isHide": false,
+	// 		"isFull": false,
+	// 		"isAffix": true,
+	// 		"isKeepAlive": true
+	// 	}
 	// }
 	
 	// 6.如果没有菜单列表，就重新请求菜单列表并添加动态路由
